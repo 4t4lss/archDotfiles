@@ -1,5 +1,5 @@
 #!/bin/bash
-TARGET_MAC="C3:D7:D1:BF:04:DF" 
+TARGET_MAC="<keyboardMacAddressHere>" 
 
 # Listen continuously to bluetooth properties via DBus (0% idle CPU)
 dbus-monitor --system "type='signal',interface='org.freedesktop.DBus.Properties',member='PropertiesChanged'" | \
