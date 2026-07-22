@@ -28,3 +28,12 @@ vim.cmd("colorscheme onedark_dark")
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
+---------------------
+----- SCROLLOFF -----
+---------------------
+vim.opt.scrolloff = 10
+
+---------------------
+-- PERSISTENT UNDO --
+---------------------
+vim.opt.undofile=true

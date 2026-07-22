@@ -22,11 +22,7 @@ hl.on("hyprland.start", function ()
     --desktop apps
     hl.exec_cmd("kitty")
     hl.exec_cmd("firefox")
-    hl.exec_cmd("[workspace special:music silent] pear-desktop")
-    -- hl.exec_cmd("pear-desktop",{
-    --     workspace = "special:magic",
-    --     silent = true,
-    -- })
+    -- hl.exec_cmd("[workspace special:music silent] pear-desktop")
 
     --authentication and scripts
     hl.exec_cmd("systemctl --user start hyprpolkitagent")

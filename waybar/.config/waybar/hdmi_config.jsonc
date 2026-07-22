@@ -21,6 +21,7 @@
         "custom/sysinfo"
     ],
     "modules-right": [
+        "idle_inhibitor",
         "network",
         "cpu",
         "memory",

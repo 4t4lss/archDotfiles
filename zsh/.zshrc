@@ -1,4 +1,3 @@
-fastfetch
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -125,5 +124,19 @@ function y() {
 # -- nvim as global editor
 export EDITOR='nvim'
 
-# -- alias pythong = python3
+# -- alias python = python3
 alias python=python3
+
+# fastfetch alias
+alias ff=fastfetch
+
+# source ~/powerlevel10k/powerlevel10k.zsh-theme
+
+#color to man pages
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+export MANROFFOPT="-c"
+
+#cd shortcuts
+hash -d dsa=~/coding/dsaPractice/
+hash -d hypr=~/.config/hypr/
+hash -d nvim=~/.config/nvim/

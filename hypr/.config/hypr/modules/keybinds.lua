@@ -92,8 +92,8 @@ hl.bind("F9", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),  
 hl.bind("F6", hl.dsp.exec_cmd("brightnessctl --device=intel_backlight s +1%"),   { locked = true, repeating = true })
 hl.bind("F5", hl.dsp.exec_cmd("brightnessctl --device=intel_backlight s 1%-"),   { locked = true, repeating = true })
 --second screen brightness up and down
-hl.bind("CTRL + F6", hl.dsp.exec_cmd("brightnessctl --device=card1-eDP-2-backlight s +1%"),   { locked = true, repeating = true })
-hl.bind("CTRL + F5", hl.dsp.exec_cmd("brightnessctl --device=card1-eDP-2-backlight s 1%-"),   { locked = true, repeating = true })
+hl.bind("SHIFT + F6", hl.dsp.exec_cmd("brightnessctl --device=card1-eDP-2-backlight s +1%"),   { locked = true, repeating = true })
+hl.bind("SHIFT + F5", hl.dsp.exec_cmd("brightnessctl --device=card1-eDP-2-backlight s 1%-"),   { locked = true, repeating = true })
 --disable trackpad
 local touchpad_enabled = true
 local touchpad_devices = {
@@ -110,14 +110,26 @@ hl.bind("ALT_R", function()
     end
 end, { description = "Toggle Laptop Touchpad State" })
 --toggle 2nd monitor on and off
+local function get_main_brightness()
+    local handle = io.popen("brightnessctl -d intel_backlight get")
+    if not handle then return 150 end -- Fallback to 150 if the execution fails
+    local result = handle:read("*a")
+    handle:close()
+    local raw_val = tonumber(result:match("%s*(%d+)%s*"))
+    if not raw_val then return 150 end -- Safe fallback
+    return raw_val
+end
 hl.bind(secondMod .. " + F23", function()
     if eDP_disabled then
-        -- If it's disabled, turn it back on
+        local target_brightness = get_main_brightness()
         hl.monitor({ output = "eDP-2", disabled = false })
-        hl.dispatch(hl.dsp.exec_cmd("sleep 0.1 && brightnessctl --device=card1-eDP-2-backlight set 150"))
+        local cmd = string.format(
+            "sleep 0.1 && brightnessctl --device=card1-eDP-2-backlight set %d", 
+            target_brightness
+        )
+        hl.dispatch(hl.dsp.exec_cmd(cmd))
         eDP_disabled = false
     else
-        -- If it's enabled, turn it off
         hl.monitor({ output = "eDP-2", disabled = true })
         eDP_disabled = true
     end
