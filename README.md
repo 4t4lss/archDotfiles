@@ -79,9 +79,10 @@ dotfiles/
 │   │   └── waybar/          # Status bar modules & styling
 │   └── yazi/
 │       └── yazi/            # TUI file manager configuration & keymaps
-└── home/                    # Targets ~/ ($HOME)
-    └── zsh/
-        └── zsh/             # Zsh profiles, exports, & .zshrc
+├── home/                    # Targets ~/ ($HOME)
+│   └── zsh/
+│       └── zsh/             # Zsh profiles, exports, & .zshrc
+└── packages.txt             # All the packages on system for compatibility
 ```
 
 ---
