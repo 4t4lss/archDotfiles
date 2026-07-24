@@ -8,7 +8,31 @@
   <img src="https://img.shields.io/badge/Manager-GNU%20Stow-000000?logo=gnu&logoColor=white" alt="Stow">
 </p>
 
-> A minimal, keyboard-driven development environment running on **Arch Linux** with support for the **Asus Zenbook Duo(UX8406CA)**.
+> [!NOTE]
+> Minimal keyboard driven development enviornment running on **Arch Linux** utilizing **Hyprland, Zsh, and Neovim** with integrated support for the **Asus Zenbook Duo(UX8406CA**.
+
+---
+
+## 🚀 Quick Start
+
+Quick Deployment using GNU Stow to create symlinks.
+⚠️ **Warning:** Do not run the commands blindly on your machine without knowing what's going on.
+To set up on a fresh machine:
+```zsh
+git clone github.com/4T4lss/archDotfiles
+
+cd dotfiles/archDotfiles/config
+
+stow -t ~/.config/ */
+
+cd ..
+
+cd home
+
+stow -t ~ zsh
+```
+
+
 
 ---
 
@@ -34,12 +58,28 @@
 ---
 
 ## 📁 Repository Structure
-
 ```text
-.dotfiles/
-├── hypr/          # Hyprland window manager rules & keybindings
-├── nvim/          # Neovim Lua configurations & LSP settings
-├── waybar/        # Waybar CSS themes and module layouts
-├── zsh/           # Zsh profiles, exports, and aliases
-├── alacritty/     # Terminal color schemes and font configurations
-└── scripts/       # Custom utility scripts
+dotfiles/
+├── README.md
+├── assets/                  # Environment screenshots & showcase media
+├── config/                  # Targets ~/.config/
+│   ├── hypr/
+│   │   └── hypr/            # Hyprland 0.55+ Lua setup
+│   │       ├── hyprland.lua
+│   │       └── scripts/     # Custom environment utility scripts
+│   ├── kitty/
+│   │   └── kitty/           # Terminal aesthetics, fonts, & keybindings
+│   ├── nvim/
+│   │   └── nvim/            # Neovim Lua configuration & LSP setup
+│   ├── rofi/
+│   │   └── rofi/            # Application launcher themes & Rasi configs
+│   ├── swaync/
+│   │   └── swaync/          # Notification center layout & CSS styles
+│   ├── waybar/
+│   │   └── waybar/          # Status bar modules & styling
+│   └── yazi/
+│       └── yazi/            # TUI file manager configuration & keymaps
+└── home/                    # Targets ~/ ($HOME)
+    └── zsh/
+        └── zsh/             # Zsh profiles, exports, & .zshrc
+```
