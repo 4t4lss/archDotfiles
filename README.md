@@ -83,3 +83,15 @@ dotfiles/
     └── zsh/
         └── zsh/             # Zsh profiles, exports, & .zshrc
 ```
+
+---
+
+## 📸 Gallery / Screenshots
+
+<img width="2880" height="1798" alt="image" src="https://github.com/user-attachments/assets/00c60a6c-e31f-42ec-ada6-85292ac2f1c9" />
+<img width="2880" height="1800" alt="image" src="https://github.com/user-attachments/assets/6da07dbd-b123-4800-8a5c-ee824b04aa33" />
+<img width="2880" height="1792" alt="image" src="https://github.com/user-attachments/assets/86b28712-446a-4bec-aaa9-74a662eca75c" />
+
+
+
+
