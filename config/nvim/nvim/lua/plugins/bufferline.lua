@@ -52,9 +52,15 @@ return {
                     },
                     -- separator_selected = {},
                     -- tab_selected = {},
-                    -- background = {},
+                    background = {
+                        -- fg = '#434C5E',
+                        -- bg = '#434C5E'
+                    },
                     -- indicator_selected = {},
-                    -- fill = {},
+                    fill = {
+                        -- fg = '#434C5E',
+                        bg = '#000000'
+                    },
                 },
             }
         end,

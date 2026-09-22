@@ -12,17 +12,17 @@ hl.on("hyprland.start", function ()
     hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
 
     -- desktop daemons
-    hl.exec_cmd("waybar -c ~/.config/waybar/config.jsonc &")
-    hl.exec_cmd("waybar -c ~/.config/waybar/hdmi_config.jsonc &")
+    hl.exec_cmd("waybar")
     hl.exec_cmd("hyprpaper")
     hl.exec_cmd("swaync")
     hl.exec_cmd("hypridle")
+    hl.exec_cmd("sudo /home/atlas/.cargo/bin/unpalm -n '*ASUS Zenbook Duo Keyboard Touchpad'")
     -- hl.exec_cmd("hyprlock")
 
     --desktop apps
     hl.exec_cmd("kitty")
     hl.exec_cmd("firefox")
-    -- hl.exec_cmd("[workspace special:music silent] pear-desktop")
+    hl.exec_cmd("[workspace special:music silent] thunderbird")
 
     --authentication and scripts
     hl.exec_cmd("systemctl --user start hyprpolkitagent")

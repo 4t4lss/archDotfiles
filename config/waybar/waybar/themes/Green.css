@@ -1,0 +1,135 @@
+/* Palette Definitions */
+@define-color text-main          #d1fae5;
+@define-color pill-bg            rgba(18, 38, 28, 0.8);
+@define-color ws-bg              rgba(20, 150, 100, .6);
+@define-color active-ws-bg       #064e3b;
+@define-color ws-hover-bg        #064e3b;
+@define-color ws-hover-text      #ffffff;
+@define-color module-hover-bg    rgba(74, 222, 128, 0.2);
+@define-color arch-hover         #1793d1;
+
+* {
+    /* `otf-font-awesome` and SpaceMono Nerd Font are required to be installed for icons */
+    font-family: "Fira Sans Semibold", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    transition: background-color .3s ease-out;
+}
+
+window#waybar {
+    background: rgba(0,0,0,0); 
+    color: @text-main;
+    font-family: 
+        SpaceMono Nerd Font,
+        feather;
+    transition: background-color .5s;
+}
+
+window#waybar.external-bar #workspaces button.active {
+    background: @active-ws-bg;
+}
+
+.modules-left{
+    background: @pill-bg;
+    margin: 0px 0px 7px 0px;
+    padding: 0 1px;
+    border-radius: 0px 0px 15px 0px;
+}
+.modules-center{
+    background: @pill-bg;
+    margin: 0px 0px 9px 0px;
+    padding: 0 1px;
+    border-radius: 0px 0px 15px 15px;
+}
+.modules-right
+{
+    background: @pill-bg;
+    margin: 0px 0px 7px 0px;
+    padding: 0 1px;
+    border-radius: 0px 0px 0px 15px;
+}
+
+#window,
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#custom-sysinfo,
+#temperature,
+#backlight,
+#backlight-screenpad,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#power-profiles-daemon,
+#language,
+#mpd {
+    padding: 0 5px;
+    border-radius: 15px;
+}
+
+#window:hover,
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#disk:hover,
+#custom-sysinfo:hover,
+#temperature:hover,
+#backlight:hover,
+#backlight-screenpad:hover,
+#network:hover,
+#window:hover,
+#pulseaudio:hover,
+#wireplumber:hover,
+#custom-media:hover,
+#tray:hover,
+#mode:hover,
+#idle_inhibitor:hover,
+#scratchpad:hover,
+#power-profiles-daemon:hover,
+#language:hover,
+#mpd:hover {
+    background: @module-hover-bg;
+}
+
+#workspaces button {
+  background: transparent;
+  font-family:
+    SpaceMono Nerd Font,
+    feather;
+  font-weight: 900;
+  font-size: 13pt;
+  color: @text-main;
+  border:none;
+  border-radius: 15px;
+}
+
+#workspaces button.active {
+    background: @ws-bg; 
+}
+
+#workspaces button:hover {
+  background: @ws-hover-bg;
+  color: @ws-hover-text;
+  box-shadow: none;
+}
+
+#custom-arch {
+    margin-left: 5px;
+    padding: 0 10px;
+    font-size: 25px;
+    transition: color .5s;
+    color: @ws-bg;
+}
+#custom-arch:hover {
+    color: @arch-hover;
+}
+#window{
+    margin-right: 30px
+}

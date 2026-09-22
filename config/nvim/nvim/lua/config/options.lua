@@ -21,6 +21,7 @@ vim.o.relativenumber = true
 ------- THEME -------
 ---------------------
 vim.cmd("colorscheme onedark_dark")
+vim.opt.termguicolors = true
 
 ---------------------
 ---- MULTIPLEXER ----
@@ -37,3 +38,11 @@ vim.opt.scrolloff = 10
 -- PERSISTENT UNDO --
 ---------------------
 vim.opt.undofile=true
+
+
+---------------------
+-- :AUTOCOMPLETION --
+---------------------
+vim.opt.wildmenu = true
+vim.opt.wildoptions = "pum,fuzzy"
+vim.opt.wildmode = "longest:full,full"

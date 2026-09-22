@@ -43,11 +43,11 @@ vim.keymap.set('n', '<A-S-p>', '<cmd>ZoomToggle<cr>')
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
 --no work need to install dependencies
--- vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
 
------- NEOTREE ------
+
 vim.keymap.set('n', '<C-t>', ':Neotree filesystem toggle left<CR>', { silent = true })
 
 ------ AERIAL -------
@@ -60,6 +60,6 @@ require("aerial").setup({
   end,
 })
 -- You probably also want to set a keymap to toggle aerial
-vim.keymap.set("n", "<C-e>", "<cmd>AerialToggle right<CR>")
+vim.keymap.set("n", "<C-a>", "<cmd>AerialToggle right<CR>")
 
 

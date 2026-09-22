@@ -1,37 +1,78 @@
 // -*- mode: jsonc -*-
-{
-    "output": ["eDP-1", "eDP-2"],
-    "layer": "top", // Waybar at top layer
-    "position": "top", // Waybar position (top|bottom|left|right)
-    "mode": "dock",
-    "height": 42, // Waybar height (to be removed for auto height)
-    // "width": 1280, // Waybar width
-    "spacing": 3, // Gaps between modules (4px)
-    // Choose the order of the modules
-    "modules-left": [
-        "custom/arch",
-        "hyprland/workspaces",
-        "hyprland/window",
-        "pulseaudio",
-        "backlight",
-        "backlight#screenpad"
-    ],
-    "modules-center": [
-        "custom/sysinfo"
-    ],
-    "modules-right": [
-        "idle_inhibitor",
-        "network",
-        "cpu",
-        "memory",
-        "temperature",
-        "battery",
-        "battery#bat2",
-        "clock"
-    ],
-    //Modules configuration
+[
+    // Internal Displays (eDP-1, eDP-2)
+    {
+        "output": ["eDP-1", "eDP-2"],
+        "layer": "top",
+        "position": "top",
+        "mode": "dock",
+        "height": 20,
+        "spacing": 1,
+        "modules-left": [
+            "custom/arch",
+            "hyprland/workspaces",
+            "hyprland/window",
+            "cpu",
+            "memory",
+            "pulseaudio",
+            "backlight",
+            "backlight#screenpad"
+        ],
+        "modules-center": [
+            "custom/sysinfo"
+        ],
+        "modules-right": [
+            "idle_inhibitor",
+            "network",
+            "temperature",
+            "battery",
+            "battery#bat2",
+            "clock"
+        ],
+        "include": [
+            "~/.config/waybar/modules.json"
+        ]
+    },
 
-    "include": [
-        "~/.config/waybar/modules.json"
-    ]
-}
+    // External Display (HDMI-A-1)
+    {
+        "name": "external-bar",
+        "output": "HDMI-A-1",
+        "layer": "top",
+        "position": "top",
+        "mode": "dock",
+        "height": 42,
+        "spacing": 3,
+        "modules-left": [
+            "custom/arch",
+            "hyprland/workspaces",
+            "hyprland/window",
+            "idle_inhibitor",
+            "battery",
+            "pulseaudio",
+            "backlight",
+            "backlight#screenpad"
+        ],
+        "modules-center": [
+            "custom/sysinfo"
+        ],
+        "modules-right": [
+            "network",
+            "cpu",
+            "memory",
+            "temperature",
+            "battery#bat2",
+            "clock#hdmi"
+        ],
+        "include": [
+            "~/.config/waybar/modules.json"
+        ],
+        // Clock override for HDMI bar
+        "clock#hdmi": {
+            "interval": 1,
+            "format": "{:%I:%M:%S %p | %A, %B %d, %Y}",
+            "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+            "format-alt": "{:%Y-%m-%d}"
+        }
+    }
+]

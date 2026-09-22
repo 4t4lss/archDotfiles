@@ -58,14 +58,17 @@ local mediaTransfer       = "localsend"
 local launcher            = "rofi -show drun -show-icons"
 local runner              = "rofi -show run"
 local discord             = "discord --enable-features=WaylandWindowDecorations --ozone-platform-hint=auto"
-local clipboard           = "cliphist list | rofi -dmenu -display-columns 2 | cliphist decode | wl-copy"
+local clipboard           = 'cliphist list | rofi -dmenu -i -p -theme-str \'entry{ placeholder : \"Clipboard Search:\";}\' -display-columns 2 | cliphist decode | wl-copy'
 local notifications       = "swaync-client -t"
 local screenshotToClip    = 'grim -g "$(slurp -d)" - | wl-copy'
 local screenshotToFiles   = 'grim -g "$(slurp -d)" ~/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png'
 local emailClient         = "thunderbird"
-local loginLock           = "loginctl lock-session"
-local shutdown            = "command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"
-local barToggle           = "~/.config/waybar/scripts/toggle_laptop.sh"
+-- local shutdown            = "command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"
+local barToggle           = "killall -SIGUSR1 waybar"
+local themeSwitcher       = "~/.config/hypr/scripts/theme_switcher.sh"
+local controlMenu         = "~/.config/hypr/scripts/power_menu.sh"
+local colorPicker         = "hyprpicker -a"
+local animationToggler    = "~/.config/hypr/scripts/animation_switcher.sh"
 --variable for 2nd monitor
 local eDP_disabled = true
 
@@ -75,13 +78,13 @@ local eDP_disabled = true
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 local secondMod = "SUPER + SHIFT"
 
----------------------
 -- QUICKLAUNCHAPPS --
 ---------------------
 hl.bind(mainMod .. " + SEMICOLON", hl.dsp.exec_cmd(terminal))                     --launch kitty
-hl.bind(secondMod .. " + SEMICOLON", hl.dsp.exec_cmd(terminal, {float = true}))   --launch kitty floating 
+hl.bind(secondMod .. " + SEMICOLON", hl.dsp.exec_cmd(terminal,
+    {float = true, size = {660,500}}))                                            --launch kitty floating 
 hl.bind(mainMod .. " + F", hl.dsp.exec_cmd(browser))                              --launch firefox
-hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))                          --launch nemo
+-- hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))                          --launch nemo
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager, {float = true}))          --launch nemo floating
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(mediaTransfer))                        --launch localsend
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(discord))                              --launch discord
@@ -89,14 +92,15 @@ hl.bind("ALT + SHIFT + Space", hl.dsp.exec_cmd(launcher))                       
 hl.bind("ALT + Space", hl.dsp.exec_cmd(runner))                                   --launch rofi desktop runner
 hl.bind(mainMod .. " + COMMA", hl.dsp.exec_cmd(clipboard))                        --launch rofi clipboard
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(emailClient))                          --launch thunderbird
-hl.bind(mainMod .. " + BACKSLASH", hl.dsp.window.pseudo())                        --different aspect ratio
-hl.bind(mainMod .. " + Y", hl.dsp.exec_cmd(notifications))                        --launch swaync notification manager/audio player
+hl.bind(mainMod .. " + U", hl.dsp.exec_cmd(notifications))                        --launch swaync notification manager/audio player
 hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd(screenshotToClip))                 --screenshot snip save to clipboard only
 hl.bind(secondMod .. " + Print", hl.dsp.exec_cmd(screenshotToFiles))              --screenshot snip save to ~/Pictures/
-hl.bind(secondMod .. " + Q", hl.dsp.exec_cmd(shutdown))                           --exit hyprland
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())                                 --close window
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(barToggle))                            --toggle waybar on/off
-hl.bind("CTRL + " .. mainMod .. " + L", hl.dsp.exec_cmd(loginLock))               --lock session
+hl.bind("CTRL + " .. mainMod .. " + L", hl.dsp.exec_cmd(controlMenu))             --control menu
+hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(colorPicker))                          --toggle waybar visibility
+hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd(themeSwitcher))                    --theme switcher
+hl.bind(secondMod .. " + Space", hl.dsp.exec_cmd(animationToggler))               --animation toggler
 
 ---------------------
 ---- MOVE-AROUND ----
@@ -111,15 +115,16 @@ hl.bind(secondMod .. " + H",  hl.dsp.window.move({ direction = "left" }))
 hl.bind(secondMod .. " + L",  hl.dsp.window.move({ direction = "right" }))
 hl.bind(secondMod .. " + K",  hl.dsp.window.move({ direction = "up" }))
 hl.bind(secondMod .. " + J",  hl.dsp.window.move({ direction = "down" }))
--- toggle fullscreen
-hl.bind(mainMod .. " + P", hl.dsp.window.fullscreen({ mode = "maximized" }))
--- toggle tile layout
-hl.bind(mainMod .. " + U", hl.dsp.layout("togglesplit"))
 -- Resize tiles relative to the tile you're on
 hl.bind(mainMod .. " + left", hl.dsp.window.resize({x = -10, y = 0, relative = true}), {repeating = true})
 hl.bind(mainMod .. " + right", hl.dsp.window.resize({ x = 10, y = 0, relative = true}), { repeating = true })
 hl.bind(mainMod .. " + down", hl.dsp.window.resize({ x = 0, y = 10, relative = true}), { repeating = true })
 hl.bind(mainMod .. " + up", hl.dsp.window.resize({ x = 0, y = -10, relative = true}), { repeating = true })
+-- toggle tile layout
+hl.bind(mainMod .. " + P", hl.dsp.window.fullscreen({ mode = "maximized" }))
+hl.bind(mainMod .. " + BACKSLASH", hl.dsp.window.pseudo())
+hl.bind(secondMod .. " + U", hl.dsp.layout("togglesplit"))
+hl.bind(mainMod .. " + V", hl.dsp.window.float())
 -- Switch workspaces with mainMod + [0-9] & Move active window to a workspace with mainMod + SHIFT + [0-9]
 for i = 1, 10 do
     local key = i % 10 -- 10 maps to key 0
@@ -166,18 +171,12 @@ hl.bind("CTRL + SHIFT + F6", hl.dsp.exec_cmd("sh -c 'brightnessctl --device=inte
 hl.bind("CTRL + SHIFT + F5", hl.dsp.exec_cmd("sh -c 'brightnessctl --device=intel_backlight s 1%- && brightnessctl --device=card1-eDP-2-backlight s 1%-'"),   { locked = true, repeating = true })
 --disable trackpad
 local touchpad_enabled = true
-local touchpad_devices = {
-    "asus-zenbook-duo-keyboard-touchpad",
-    "primax-electronics-ltd.-asus-zenbook-duo-keyboard-touchpad"
-}
 hl.bind("ALT_R", function()
     touchpad_enabled = not touchpad_enabled
-    for _, device in ipairs(touchpad_devices) do
-        hl.device({
-            name = device,
-            enabled = touchpad_enabled
-        })
-    end
+    hl.device({
+        name = "filtered-touchpad",
+        enabled = touchpad_enabled
+    })
 end, { description = "Toggle Laptop Touchpad State" })
 --toggle 2nd internal monitor on and off
 hl.bind(secondMod .. " + F23", function()
@@ -195,6 +194,8 @@ hl.bind(secondMod .. " + F23", function()
         eDP_disabled = true
     end
 end)
+
+
 
 ---------------------
 ---- OTHER-BINDS ----

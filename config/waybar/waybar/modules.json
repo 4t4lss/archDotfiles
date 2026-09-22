@@ -113,7 +113,7 @@
         "bat": "BAT2"
     },
     "clock": {
-        "format": "{:%I:%M | %e%B} ",
+        "format": "{:%I:%M | %m/%d/%Y} ",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d}"
     }
