@@ -1,1 +1,1 @@
-/home/atlas/.config/hypr/modules/themes/Brown.lua
+/home/atlas/.config/hypr/modules/themes/Blue.lua
