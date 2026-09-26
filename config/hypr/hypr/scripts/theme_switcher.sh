@@ -1,13 +1,18 @@
 #!/usr/bin/env bash
 
 HYPR_THEME_DIR="$HOME/.config/hypr/modules/themes"
-WAYBAR_THEME_DIR="$HOME/.config/waybar/themes"
-ROFI_THEME_DIR="$HOME/.config/rofi/themes"
-SWAYNC_THEME_DIR="$HOME/.config/swaync/themes"
 HYPR_ACTIVE_SYMLINK="$HYPR_THEME_DIR/active.lua"
+
+WAYBAR_THEME_DIR="$HOME/.config/waybar/themes"
 WAYBAR_ACTIVE_SYMLINK="$HOME/.config/waybar/style.css"
+
+ROFI_THEME_DIR="$HOME/.config/rofi/themes"
 ROFI_ACTIVE_SYMLINK="$HOME/.config/rofi/config.rasi"
+
+SWAYNC_THEME_DIR="$HOME/.config/swaync/themes"
 SWAYNC_ACTIVE_SYMLINK="$HOME/.config/swaync/style.css"
+
+WALLPAPER_ACTIVE_SYMLINK="$HOME/dotfiles/wallpapers/activeWallpaper"
 
 if [ ! -d "$HYPR_THEME_DIR" ]; then
     exit 1
@@ -96,13 +101,14 @@ element-text {
 SELECTED=$(echo -e -n "$MENU_INPUT" | rofi -dmenu -i -theme-str "$ROFI_STYLE")
 
 if [ -n "$SELECTED" ] && [ -f "$HYPR_THEME_DIR/$SELECTED.lua" ] && [ -f "$WAYBAR_THEME_DIR/$SELECTED.css" ] ; then
+    WALLPAPER=$(lua -e "local status, t = pcall(dofile, '$HYPR_THEME_DIR/$SELECTED.lua'); if status and type(t) == 'table' then print(t.wallpaper or '') end")
+    
     #swap pointer
     ln -sf "$HYPR_THEME_DIR/$SELECTED.lua" "$HYPR_ACTIVE_SYMLINK"
     ln -sf "$WAYBAR_THEME_DIR/$SELECTED.css" "$WAYBAR_ACTIVE_SYMLINK"
     ln -sf "$ROFI_THEME_DIR/$SELECTED.rasi" "$ROFI_ACTIVE_SYMLINK"
     ln -sf "$SWAYNC_THEME_DIR/$SELECTED.css" "$SWAYNC_ACTIVE_SYMLINK"
-
-    WALLPAPER=$(lua -e "local status, t = pcall(dofile, '$HYPR_THEME_DIR/$SELECTED.lua'); if status and type(t) == 'table' then print(t.wallpaper or '') end")
+    ln -sf "$WALLPAPER" "$WALLPAPER_ACTIVE_SYMLINK"
 
     if [ -n "$WALLPAPER" ] && [ -f "$WALLPAPER" ]; then
         ACTIVE_MONITORS=$(hyprctl monitors -j | jq -r '.[].name')
@@ -111,6 +117,7 @@ if [ -n "$SELECTED" ] && [ -f "$HYPR_THEME_DIR/$SELECTED.lua" ] && [ -f "$WAYBAR
             hyprctl hyprpaper wallpaper "$MON,$WALLPAPER"
         done
     fi
+
     killall -SIGUSR2 waybar
     swaync-client -rs
 fi
