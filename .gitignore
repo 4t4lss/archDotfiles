@@ -1,0 +1,11 @@
+#hyprland
+/config/hypr/hypr/modules/animations/active.lua
+/config/hypr/hypr/modules/themes/active.lua
+#rofi
+/config/rofi/rofi/config.rasi
+#swaync
+/config/swaync/swaync/style.css
+#waybar
+/config/waybar/waybar/style.css
+#wallpaper for hyprlock and hyprpaper
+/wallpapers/activeWallpaper

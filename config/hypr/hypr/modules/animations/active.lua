@@ -1,1 +1,0 @@
-/home/atlas/.config/hypr/modules/animations/off.lua
