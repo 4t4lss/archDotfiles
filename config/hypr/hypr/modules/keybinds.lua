@@ -96,11 +96,13 @@ hl.bind(mainMod .. " + U", hl.dsp.exec_cmd(notifications))                      
 hl.bind(mainMod .. " + Print", hl.dsp.exec_cmd(screenshotToClip))                 --screenshot snip save to clipboard only
 hl.bind(secondMod .. " + Print", hl.dsp.exec_cmd(screenshotToFiles))              --screenshot snip save to ~/Pictures/
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())                                 --close window
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(barToggle))                            --toggle waybar on/off
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(barToggle))                            --toggle waybar visibility
 hl.bind("CTRL + " .. mainMod .. " + L", hl.dsp.exec_cmd(controlMenu))             --control menu
-hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(colorPicker))                          --toggle waybar visibility
+hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(colorPicker))                          --color picker
 hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd(themeSwitcher))                    --theme switcher
 hl.bind(secondMod .. " + Space", hl.dsp.exec_cmd(animationToggler))               --animation toggler
+
+hl.bind(mainMod .. " + BACKSPACE", hl.dsp.exec_cmd("hyprlock"))               --testing bind
 
 ---------------------
 ---- MOVE-AROUND ----

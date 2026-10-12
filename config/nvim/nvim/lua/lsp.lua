@@ -6,19 +6,6 @@ vim.lsp.enable("clangd")
 vim.lsp.enable("neocmake")
 vim.lsp.enable("basedpyright")
 
----------------------
--- SYMBOLS CHANGE  --
----------------------
-vim.diagnostic.config({
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = " ",
-      [vim.diagnostic.severity.WARN] = " ",
-      [vim.diagnostic.severity.HINT] = "󰠠 ",
-      [vim.diagnostic.severity.INFO] = " ",
-    },
-  },
-})
 
 vim.diagnostic.config({
   virtual_text = true, -- Shows the warning text right next to the code
@@ -26,5 +13,3 @@ vim.diagnostic.config({
   underline = true,    -- Underline the offending code
 })
 
-vim.keymap.set('n', '<Leader>d', vim.diagnostic.open_float, { desc = "Show diagnostic" })
-vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action, { desc = "See available code actions" })

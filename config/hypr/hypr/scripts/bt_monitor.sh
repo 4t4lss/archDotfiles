@@ -20,12 +20,16 @@ while read -r line; do
             
             #wait 
             sleep 0.2
+
+            #apply wallpaper
+            WALLPAPER=$(lua -e "local status, t = pcall(dofile, '/home/atlas/.config/hypr/modules/themes/active.lua'); if status and type(t) == 'table' then print(t.wallpaper or '') end")
+            hyprctl hyprpaper wallpaper "eDP-2,$WALLPAPER,cover"
             
             # apply brightness level
             brightnessctl --device=card1-eDP-2-backlight set "$MAIN_BRIGHTNESS"
         else
             #keyboard connected = monitor off
-            hyprctl eval 'hl.monitor({output = "eDP-2", disabled = true})'
+            hyprctl eval 'hl.monitor({output = "eDP-2",disabled = true})'
         fi
     fi
 done

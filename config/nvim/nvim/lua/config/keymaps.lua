@@ -9,7 +9,6 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set('n', '<Tab>', ':bnext<CR>', opts)
 vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>', opts)
 vim.keymap.set('n', '<leader>w', ':bdelete!<CR>', opts) -- close buffer
-vim.keymap.set('n', '<leader>b', '<cmd> enew <CR>', opts) -- new buffer
 
 ----- TERMINAL ------
 vim.keymap.set('n', '<leader>t', function()
@@ -42,7 +41,6 @@ vim.keymap.set('n', '<A-S-p>', '<cmd>ZoomToggle<cr>')
 ----- TELESCOPE -----
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
---no work need to install dependencies
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
@@ -59,7 +57,20 @@ require("aerial").setup({
     vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
   end,
 })
--- You probably also want to set a keymap to toggle aerial
+-- toggle aerial
 vim.keymap.set("n", "<C-a>", "<cmd>AerialToggle right<CR>")
 
+----- DEBUGGER ------
+vim.keymap.set('n', '<leader>b', function() require('dap').toggle_breakpoint() end)
+vim.keymap.set('n', '<leader>sf', function() require('dap').step_over() end)
+vim.keymap.set('n', '<leader>sb', function() require('dap').step_back() end)
+vim.keymap.set('n', '<leader>si', function() require('dap').step_into() end)
+vim.keymap.set('n', '<leader>so', function() require('dap').step_out() end)
+--toggle typing :DapUI
+vim.api.nvim_create_user_command('DapUI', function()
+  require('dapui').toggle()
+end, {})
 
+----- CODE DIAGNOSTICS/ACTIONS ------
+vim.keymap.set('n', '<Leader>d', vim.diagnostic.open_float, { desc = "Show diagnostic" })
+vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action, { desc = "See available code actions" })

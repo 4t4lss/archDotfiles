@@ -67,3 +67,4 @@ hl.workspace_rule({
     workspace = "3",
     monitor = "HDMI-A-1"
 })
+
